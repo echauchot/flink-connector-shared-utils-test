@@ -32,12 +32,18 @@ jobs:
     with:
       flink_version: 1.16-SNAPSHOT
       connector_branch: ci_utils
-  disable-convergence:
+  disable-sanity-checks:
     uses: ./.github/workflows/ci.yml
     with:
-      flink_version: 1.16.1
+      flink_version: 1.16.2
       connector_branch: ci_utils
-      run_dependency_convergence: false
+      run_sanity_checks: false
+  enable-sanity-checks:
+    uses: ./.github/workflows/ci.yml
+    with:
+      flink_version: 1.17.1
+      connector_branch: ci_utils
+      run_sanity_checks: true
   multiple-branches:
     strategy:
       matrix:
