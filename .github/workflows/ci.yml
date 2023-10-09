@@ -41,8 +41,8 @@ on:
         required: false
         type: number
         default: 50
-      run_dependency_convergence:
-        description: "Whether to run the dependency convergence check"
+      run_sanity_checks:
+        description: "Whether to run the dependency convergence and archunit checks"
         required: false
         type: boolean
         default: true
@@ -84,9 +84,15 @@ jobs:
         with:
           maven-version: 3.8.6
 
-      - name: "Enable dependency convergence check"
-        if: ${{ inputs.run_dependency_convergence }}
-        run: echo "MVN_DEPENDENCY_CONVERGENCE=-Dflink.convergence.phase=install -Pcheck-convergence" >> $GITHUB_ENV
+      - name: "Enable sanity checks"
+        if: ${{ inputs.run_sanity_checks }}
+        # enable convergence checks and do not disable archunit tests (Junit tests)
+        run: echo "MVN_SANITY_CHECKS=-Dflink.convergence.phase=install -Pcheck-convergence" >> $GITHUB_ENV
+
+      - name: "Disable sanity checks"
+        if: ${{ ! inputs.run_sanity_checks }}
+        # do not enable convergence checks and disable archunit tests (Junit tests)
+        run: echo "MVN_SANITY_CHECKS=-Dtest='!*ArchitectureTest'" >> $GITHUB_ENV
 
       - name: "Determine Flink binary url"
         run: |
