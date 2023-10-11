@@ -18,13 +18,13 @@
 
 package org.apache.flink.connector.testing.architecture;
 
+import org.apache.flink.architecture.TestCodeArchitectureTestBase;
+import org.apache.flink.architecture.common.ImportOptions;
+
 import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.junit.ArchTests;
-
-import org.apache.flink.architecture.TestCodeArchitectureTestBase;
-import org.apache.flink.architecture.common.ImportOptions;
 
 /** Architecture tests for test code. */
 @AnalyzeClasses(
