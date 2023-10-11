@@ -37,12 +37,14 @@ jobs:
     with:
       flink_version: 1.16.2
       connector_branch: ci_utils
+      # let's say the connector under test was built against flink 1.17.1, disable all the sanity checks when tested against 1.16.2
       run_sanity_checks: false
   enable-sanity-checks:
     uses: ./.github/workflows/ci.yml
     with:
       flink_version: 1.17.1
       connector_branch: ci_utils
+      # let's say the connector under test was built against flink 1.17.1, enable all the sanity checks when tested against 1.17.1
       run_sanity_checks: true
   multiple-branches:
     strategy:

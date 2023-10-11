@@ -33,7 +33,7 @@ under the License.
 	<packaging>jar</packaging>
 
 	<properties>
-		<flink.version>1.16.1</flink.version>
+		<flink.version>1.17.1</flink.version>
 		<japicmp.referenceVersion>1.16.0</japicmp.referenceVersion>
 	</properties>
 
@@ -49,6 +49,22 @@ under the License.
 			<version>${flink.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- ArchUit test dependencies -->
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-architecture-tests-test</artifactId>
+			<version>${flink.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-architecture-tests-production</artifactId>
+			<version>${flink.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
