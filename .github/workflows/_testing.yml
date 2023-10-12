@@ -30,8 +30,8 @@ jobs:
   snapshot-version:
     uses: ./.github/workflows/ci.yml
     with:
-      flink_version: 1.19-SNAPSHOT
-      run_sanity_checks: false
+      flink_version: 1.18-SNAPSHOT
+      run_sanity_checks: true
   disable-sanity-checks:
     uses: ./.github/workflows/ci.yml
     with:
