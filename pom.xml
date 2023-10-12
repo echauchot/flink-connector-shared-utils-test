@@ -48,6 +48,12 @@ under the License.
 			<artifactId>flink-test-utils-junit</artifactId>
 			<version>${flink.version}</version>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.commons</groupId>
+					<artifactId>commons-compress</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- ArchUit test dependencies -->
@@ -64,10 +70,6 @@ under the License.
 				<exclusion>
 					<groupId>org.junit.platform</groupId>
 					<artifactId>junit-platform-engine</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.commons</groupId>
-					<artifactId>commons-compress</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
