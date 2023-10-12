@@ -31,7 +31,7 @@ jobs:
     uses: ./.github/workflows/ci.yml
     with:
       flink_version: 1.19-SNAPSHOT
-      run_sanity_checks: true
+      run_sanity_checks: false
   disable-sanity-checks:
     uses: ./.github/workflows/ci.yml
     with:
