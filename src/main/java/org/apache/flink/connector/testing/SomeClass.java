@@ -18,5 +18,11 @@
 
 package org.apache.flink.connector.testing;
 
+import static org.apache.flink.util.Preconditions.checkNotNull;
+
 /** A dummy class; only exists so that the compile/packaging plugins have something to do. */
-public class SomeClass {}
+public class SomeClass {
+    public static void main(String[] args) {
+        checkNotNull(new Object());
+    }
+}
