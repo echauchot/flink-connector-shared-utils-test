@@ -27,23 +27,22 @@ jobs:
     with:
       flink_version: 1.17.1
       connector_branch: ci_utils
-  snapshot-without-sanity-checks:
+  snapshot-without-archunit-tests:
     uses: ./.github/workflows/ci.yml
     with:
       flink_version: 1.19-SNAPSHOT
-      run_sanity_checks: false
-  non-main-version_without-sanity-checks:
+      skip_archunit_tests: true
+  non-main-version-without-archunit-tests:
     uses: ./.github/workflows/ci.yml
     with:
       flink_version: 1.16.2
-      # let's say the connector under test was built against flink 1.17.1, disable all the sanity checks when tested against 1.16.2
-      run_sanity_checks: false
-  main-version-with-sanity-checks:
+      # let's say the connector under test was built against flink 1.17.1, disable the archunit tests when tested against 1.16.2
+      skip_archunit_tests: true
+  main-version-with-archunit-tests:
     uses: ./.github/workflows/ci.yml
     with:
       flink_version: 1.17.1
-      # let's say the connector under test was built against flink 1.17.1, enable all the sanity checks when tested against 1.17.1
-      run_sanity_checks: true
+      # let's say the connector under test was built against flink 1.17.1, leave the archunit tests enabled when tested against 1.17.1
   multiple-branches:
     strategy:
       matrix:
