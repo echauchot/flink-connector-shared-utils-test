@@ -41,11 +41,16 @@ on:
         required: false
         type: number
         default: 50
-      run_sanity_checks:
-        description: "Whether to run the dependency convergence and archunit checks"
+      run_dependency_convergence:
+        description: "Whether to run the dependency convergence check"
         required: false
         type: boolean
         default: true
+      skip_archunit_tests:
+        description: "Whether to skip the archunit tests"
+        required: false
+        type: boolean
+        default: false
       connector_branch:
         description: "Branch that need to be checked out"
         required: false
@@ -84,15 +89,13 @@ jobs:
         with:
           maven-version: 3.8.6
 
-      - name: "Enable sanity checks"
-        if: ${{ inputs.run_sanity_checks }}
-        # enable convergence checks and do not disable archunit tests (Junit tests)
-        run: echo "MVN_SANITY_CHECKS=-Dflink.convergence.phase=install -Pcheck-convergence" >> $GITHUB_ENV
+      - name: "Enable dependency convergence check"
+        if: ${{ inputs.run_dependency_convergence }}
+        run: echo "MVN_DEPENDENCY_CONVERGENCE=-Dflink.convergence.phase=install -Pcheck-convergence" >> $GITHUB_ENV
 
-      - name: "Disable sanity checks"
-        if: ${{ ! inputs.run_sanity_checks }}
-        # do not enable convergence checks and disable archunit tests (Junit tests)
-        run: echo "MVN_SANITY_CHECKS=-Dtest='!*ArchitectureTest'" >> $GITHUB_ENV
+      - name: "Disable archunit tests"
+        if: ${{ inputs.skip_archunit_tests }}
+        run: echo "MVN_ARCHUNIT_TESTS=-Dtest='!*ArchitectureTest'" >> $GITHUB_ENV
 
       - name: "Determine Flink binary url"
         run: |
@@ -151,7 +154,8 @@ jobs:
             -DaltDeploymentRepository=validation_repository::default::file:${{ env.MVN_VALIDATION_DIR }} \
             -Dscala-2.12 \
             -Prun-end-to-end-tests -DdistDir=${{ env.FLINK_CACHE_DIR }}/flink-${{ inputs.flink_version }} \
-            ${{ env.MVN_SANITY_CHECKS }} \
+            ${{ env.MVN_DEPENDENCY_CONVERGENCE }} \          
+            ${{ env.MVN_ARCHUNIT_TESTS }} \
             ${{ env.MVN_CONNECTION_OPTIONS }} \
             -Dlog4j.configurationFile=file://$(pwd)/tools/ci/log4j.properties \
             | tee ${{ env.MVN_BUILD_OUTPUT_FILE }}
