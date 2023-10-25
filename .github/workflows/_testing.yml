@@ -47,6 +47,12 @@ jobs:
     uses: ./.github/workflows/ci.yml
     with:
       flink_version: 1.17.1
+  disable-convergence:
+    uses: ./.github/workflows/ci.yml
+    with:
+      flink_version: 1.16.1
+      connector_branch: ci_utils
+      run_dependency_convergence: false
   multiple-branches:
     strategy:
       matrix:
