@@ -70,6 +70,14 @@ jobs:
       MVN_BUILD_OUTPUT_FILE: "/tmp/mvn_build_output.out"
       MVN_VALIDATION_DIR: "/tmp/flink-validation-deployment"
     steps:
+      - name: Temp check out parent_pom code
+        uses: actions/checkout@v3
+        with:
+          ref: "FLINK-32563-additionalExcludes-parent_pom"
+
+      - name: Temp install parent_pom
+        run: mvn clean install
+
       - run: echo "Running CI pipeline for JDK version ${{ matrix.jdk }}"
 
       - name: Check out repository code
