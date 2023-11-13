@@ -25,9 +25,9 @@ under the License.
         <version>20</version>
     </parent>
 
-    <groupId>org.apache.flink</groupId>
+    <groupId>io.github.echauchot.flink</groupId>
     <artifactId>flink-connector-parent</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <url>https://flink.apache.org</url>
