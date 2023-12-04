@@ -73,7 +73,7 @@ jobs:
       - name: Temp check out parent_pom code
         uses: actions/checkout@v3
         with:
-          ref: "FLINK-32563-additionalExcludes-parent_pom"
+          ref: "FLINK-33305-customize-surefire-parent-pom"
 
       - name: Temp install parent_pom
         run: mvn clean install
