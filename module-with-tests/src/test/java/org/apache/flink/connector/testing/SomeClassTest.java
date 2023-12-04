@@ -20,8 +20,15 @@ package org.apache.flink.connector.testing;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 class SomeClassTest {
 
     @Test
-    void someTest() {}
+    void someTest() throws IOException {
+        try (FileOutputStream fos = new FileOutputStream("/tmp/test")) {
+            fos.write('a');
+        }
+    }
 }
