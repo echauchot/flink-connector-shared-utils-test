@@ -10,5 +10,10 @@
 	</parent>
 
 	<artifactId>module-with-tests</artifactId>
+	<properties>
+		<surefire.module.config>--add-opens=java.base/java.io=ALL-UNNAMED</surefire.module.config>
+
+
+	</properties>
 
 </project>
